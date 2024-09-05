@@ -12,4 +12,10 @@ class MainController extends AbstractController
     public function home() {
         return $this->render('main/home.html.twig');
     }
+
+    #[Route('/aboutUs', name: 'main_aboutUs', methods: ['GET', 'POST'])]
+    public function aboutUs() {
+        return $this->render('main/aboutUs.html.twig');
+    }
+
 }
