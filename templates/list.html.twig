@@ -5,10 +5,13 @@
 {% endblock %}
 
 {% block body %}
+    <section class="wishes-list">
     <h2>Tous vos voeux !</h2>
-    {% for wish in wish %}
-        <a href="{{ path('wish_detail', { 'id': wish.id }) }}">{{ wish.title }}</a>
+    {% for wish in wishes %}
+        <article>
+        <a href="{{ path('wish_detail', {id: wish.id}) }}" title="View this wish in details">{{ wish.title }}</a>
+        </article>
     {% endfor %}
-
+    </section>
 {% endblock %}
 

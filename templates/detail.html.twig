@@ -5,11 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ wish.title }}</h1>
-    <p>{{ wish.description }}</p>
-    <p>Auteur : {{ wish.author }}</p>
-    <p>Date de création : {{ wish.dateCreated|date('Y-m-d H:i') }}</p>
-    <p>Publié : {{ wish.isPublished ? 'Oui' : 'Non' }}</p>
-
+    <h2>{{ wish.title }}</h2>
+    {# on utilise le filtre date() pour convertir l'objet en chaîne #}
+    <p class="wish-credit">Created by {{ wish.author }} on {{ wish.dateCreated|date('Y-m-d') }}</p>
+    {# le filtre nl2br convertie les sauts de ligne du texte en balises <br> #}
+    <div>{{ wish.description|nl2br }}</div>
 {% endblock %}
 
