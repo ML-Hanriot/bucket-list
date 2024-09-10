@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+<h2>Add your wishes !</h2>
+    <div>
+        {#novalidate indique que le formulaire ne doit pas être validé au submit#}
+        {{ form_start(wishForm, {attr: {novalidate: 'novalidate'}})) }}
+        {{ form_widget(wishForm) }}
+        <button>Create !</button>
+        {{ form_end(wishForm) }}
+    </div>
+
+{% endblock %}
+

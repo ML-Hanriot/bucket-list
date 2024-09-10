@@ -27,10 +27,20 @@
                     <nav class="header-nav">
                         <a href="{{ path('main_home') }}" title="Page d'accueil">Home</a>
                         <a href="{{ path('wish_list') }}" title="Liste d'idées">Liste d'idées</a>
+                        <a href="{{ path('wish_create') }}" title="Création d'idée">Création d'idée</a>
                         <a href="{{ path('main_aboutUs') }}" title="A propos de nous">A propos de nous</a>
                     </nav>
                 </div>
             </header>
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                <div class="flash flash-{{ label }}">
+                    {{ message }}
+                </div>
+                 {% endfor %}
+            {% endfor %}
+
             <main>
                 <div class="container">
                     {% block body %}{% endblock %}

@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Asul', sans-serif;
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
 }
 .container {
     max-width: 800px;
@@ -52,6 +52,32 @@ main a {
 }
 .wish-credit {
     font-size: 0.9rem; font-style: italic;
+}
+label {
+    display: block;
+}
+input,
+textarea,
+select {
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
+}
+.flash {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+.flash-success {
+    background-color: #a2a232;
+}
+button {
+    padding: 0.5rem 0.7rem;
+    font-family: inherit;
 }
 footer {
     padding: 2rem 0;

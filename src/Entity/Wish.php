@@ -15,12 +15,35 @@ class Wish
     private ?int $id = null;
 
     #[ORM\Column(length: 250)]
+    #[ORM\Column(type:"string", length:250)]
+    #[Assert\NotBlank(message:"Please provide an idea!")]
+    #[Assert\Length(
+     min:5,
+     max:250,
+     minMessage:"Minimum 5 characters please!",
+     maxMessage:"Maximum 250 characters please!"
+)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+   #[ORM\Column(type:"text", nullable:true)]
+#[Assert\Length(
+    min:5,
+    max:5000,
+    minMessage:"Minimum 5 characters please!",
+     maxMessage:"Maximum 5000 characters please!"
+)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 50)]
+#[Assert\NotBlank(message:"Please provide your username!")]
+#[Assert\Length(
+     min:3,
+     max:50,
+     minMessage:"Minimum 3 characters please!",
+     maxMessage:"Maximum 50 characters please!"
+ )]
+#[Assert\Regex(pattern:"/^[a-z0-9_-]+$/i",
+    message:"Please use only letters, numbers, underscores and dashes!")]
+
     private ?string $author = null;
 
     #[ORM\Column]
