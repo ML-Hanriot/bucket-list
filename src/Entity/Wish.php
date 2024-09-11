@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\WishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WishRepository::class)]
 class Wish
@@ -14,7 +15,6 @@ class Wish
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 250)]
     #[ORM\Column(type:"string", length:250)]
     #[Assert\NotBlank(message:"Please provide an idea!")]
     #[Assert\Length(
@@ -26,7 +26,7 @@ class Wish
     private ?string $title = null;
 
    #[ORM\Column(type:"text", nullable:true)]
-#[Assert\Length(
+    #[Assert\Length(
     min:5,
     max:5000,
     minMessage:"Minimum 5 characters please!",
@@ -34,14 +34,14 @@ class Wish
 )]
     private ?string $description = null;
 
-#[Assert\NotBlank(message:"Please provide your username!")]
-#[Assert\Length(
+    #[Assert\NotBlank(message:"Please provide your username!")]
+    #[Assert\Length(
      min:3,
      max:50,
      minMessage:"Minimum 3 characters please!",
      maxMessage:"Maximum 50 characters please!"
  )]
-#[Assert\Regex(pattern:"/^[a-z0-9_-]+$/i",
+    #[Assert\Regex(pattern:"/^[a-z0-9_-]+$/i",
     message:"Please use only letters, numbers, underscores and dashes!")]
 
     private ?string $author = null;
@@ -51,6 +51,9 @@ class Wish
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreated = null;
+
+    #[ORM\OneToOne(mappedBy: 'wishes', cascade: ['persist', 'remove'])]
+    private ?Category $categories = null;
 
     public function getId(): ?int
     {
@@ -113,6 +116,23 @@ class Wish
     public function setDateCreated(\DateTimeInterface $dateCreated): static
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getCategories(): ?Category
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(Category $categories): static
+    {
+        // set the owning side of the relation if necessary
+        if ($categories->getWishes() !== $this) {
+            $categories->setWishes($this);
+        }
+
+        $this->categories = $categories;
 
         return $this;
     }
